@@ -1,0 +1,28 @@
+{% extends "app-authenticated.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+            <h1 class="display-4">Accountgegevens</h1>
+        </div>
+        <div class="row justify-content-md">
+
+
+            <div class="jumbotron white box-shadow pb-md-4 col-5">
+
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item"><strong>Voornaam:</strong> {{ account.getFirstName() }}</li>
+                    <li class="list-group-item"><strong>Achternaam:</strong> {{ account.getLastName() }}</li>
+                    <li class="list-group-item"><strong>Email:</strong> {{ account.getEmail() }}</li>
+                    <li class="list-group-item"><strong>Wachtwoord:</strong> ****</li>
+                    <li class="list-group-item"><strong>Role</strong> {{ account.getRole().getName() }}</li>
+                </ul>
+                <div class="col pb-md-2 col-12 text-right">
+                    <a class="btn btn-primary" href="{{ root }}/account/edit">Wijzigen</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

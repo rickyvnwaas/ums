@@ -1,0 +1,21 @@
+{% extends "app.twig" %}
+{% block css %}
+    <link href="{{ root }}/resources/css/signin.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<form class="form-signin" action="{{ root }}/login" method="post">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail" class="sr-only">Email</label>
+    <label class="error">{{ errors.email }}</label>
+    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" autofocus>
+    <label class="error">{{ errors.password }}</label>
+    <label for="inputPassword" class="sr-only">Wachtwoord</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <div class="form-group m-t-10 mb-0 row">
+        <div class="col-sm-12">
+            <a class="text-muted" href="{{ root }}/password-reset"><i class="mdi mdi-lock"></i> Wachtwoord vergeten?</a>
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "app-authenticated.twig" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-md-center">
+
+        <div class="jumbotron white box-shadow col-5 center">
+            <div class="center pb-md-4 mx-auto">
+                <h1 class="display-4 text-center">Wijzigen</h1>
+            </div>
+            <form action="{{ root }}/admin/users/{{ user.getId() }}/put" method="post">
+                <label class="error">{{ errors.first_name }}</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Voornaam" name="first_name" value="{{ user.getFirstName() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.last_name }}</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Achternaam"  name="last_name" value="{{ user.getLastName() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.password }}</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Wachtwoord"  name="password" value="{{ user.getPassword() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.password }}</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Herhaal wachtwoord"  name="repeat_password" value="{{ user.getPassword() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.email }}</label>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email" value="{{ user.getEmail() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.role_id }}</label>
+                <div class="input-group mb-3">
+                    <select class="form-control" name="role_id">
+                        {% for role in roles %}
+                            <option {% if user.getRoleId() == role.getId() %} selected  {% endif %} value="{{ role.getId() }}">{{ role.getName() }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <label class="error">{{ errors.question_id }}</label>
+                <div class="input-group mb-3">
+                    <select class="form-control" name="question_id">
+                        <option>Vraag...</option>
+                        {% for question in questions %}
+                            <option {% if user.getQuestionId() == question.getId() %} selected  {% endif %} value="{{ question.getId() }}">{{ question.getText() }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <label class="error">{{ errors.secret }}</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Antwoord" name="secret" value="{{ user.getQuestionSecret() }}" aria-describedby="basic-addon1" >
+                </div>
+                <label class="error">{{ errors.note }}</label>
+                <div class="form-group mb-3">
+                    <textarea class="form-control" name="note" placeholder="Notitie..." rows="5" id="comment">{{ user.getNote() }}</textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="active" checked>
+                            Is actief
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

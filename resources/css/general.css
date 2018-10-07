@@ -1,0 +1,33 @@
+body {
+    background: #f0f5f9;
+}
+
+.btn-primary {
+    background: #fbbb18;
+    border-color: #fbbb18;
+}
+
+.btn-primary:hover{
+    background: #e9a804;
+    border-color: #e9a804;
+}
+
+.white {
+    background: white;
+}
+
+.box-shadow {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    border-bottom: 1px solid #dee2e6;
+}
+
+a.a-primary {
+    color: #e9a804;
+    border-color: #e9a804;
+}
+
+label.error {
+    color: red;
+}
+
+

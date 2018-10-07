@@ -1,0 +1,30 @@
+{% extends "app-authenticated.twig" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-md-center">
+
+        <div class="jumbotron white box-shadow col-5 center">
+            <div class="center pb-md-4 mx-auto">
+                <h1 class="display-4 text-center">Verwijderen</h1>
+            </div>
+            <form action="{{ root }}/admin/users/{{ user.getId() }}/destroy" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Voornaam" aria-label="Voornaam" name="first_name" value="{{ user.getFirstName() }}" aria-describedby="basic-addon1" readonly>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Achternaam" aria-label="Achternaam" name="last_name" value="{{ user.getLastName() }}" aria-describedby="basic-addon1" readonly>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email" value="{{ user.getEmail() }}" aria-describedby="basic-addon1" readonly>
+                </div>
+                <div class="form-group mb-3">
+                    <textarea class="form-control" rows="5" id="comment">{{ user.getNote() }}</textarea>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Verwijderen</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

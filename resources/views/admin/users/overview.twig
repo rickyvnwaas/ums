@@ -1,0 +1,63 @@
+{% extends "app-authenticated.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+            <h1 class="display-4">Users</h1>
+            <div class="row">
+                <div class="col col-md-6">
+                    <form method="get" class="form-inline">
+                        <div class="form-group mx-sm-1 mb-2">
+                            <label for="inputSearch" class="sr-only">Zoeken</label>
+                            <input type="text" name="query" class="form-control" value="{{ searchQuery }}" placeholder="Zoeken...">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Zoek</button>
+                    </form>
+                </div>
+                <div class="col col-md-6 text-right">
+                    <a class="btn btn-primary" href="{{ root }}/admin/users/create">User aanmaken</a>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="jumbotron white box-shadow">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Voornaam</th>
+                    <th scope="col">Achternaam</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Actief</th>
+                    <th scope="col">Acties</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                <tr>
+                    <th scope="row">{{ user.getId() }}</th>
+                    <td>{{ user.getFirstName() }}</td>
+                    <td>{{ user.getLastName() }}</td>
+                    <td>{{ user.getEmail() }}</td>
+                    <td>{{ user.getRole().getName() }}</td>
+                    <td>
+                        <div class="checkbox">
+                            <input data-id="{{ user.getId() }}" class="active-toggle" type="checkbox" {% if user.isActive() %} checked {% endif %}>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="a-primary" href="{{ root }}/admin/users/{{ user.getId() }}/edit">Wijzigen</a> |
+                        <a class="a-primary" href="{{ root }}/admin/users/{{ user.getId() }}/delete">Verwijderen</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+{% endblock %}

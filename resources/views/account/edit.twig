@@ -1,0 +1,40 @@
+{% extends "app-authenticated.twig" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-md-center">
+
+        <div class="jumbotron white box-shadow col-5 center">
+            <div class="center pb-md-4 mx-auto">
+                <h1 class="display-4 text-center">Account wijzigen</h1>
+            </div>
+            <form action="{{ root }}/account/put" method="post">
+
+                <label class="error">{{ errors.first_name }}</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Voornaam" aria-label="Voornaam" name="first_name" value="{{ account.getFirstName() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.last_name }}</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Achternaam" aria-label="Achternaam" name="last_name" value="{{ account.getLastName() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.password }}</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Wachtwoord"  name="password" value="{{ account.getPassword() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.password }}</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Herhaal wachtwoord"  name="repeat_password" value="{{ account.getPassword() }}" aria-describedby="basic-addon1">
+                </div>
+                <label class="error">{{ errors.email }}</label>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email" value="{{ account.getEmail() }}" aria-describedby="basic-addon1">
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
