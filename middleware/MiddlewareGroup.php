@@ -4,6 +4,8 @@ namespace middleware;
 
 
 use core\middleware\IMiddleware;
+use core\RequestedUri;
+use core\Uri;
 
 class MiddlewareGroup
 {
@@ -11,6 +13,11 @@ class MiddlewareGroup
      * @var IMiddleware[]
      */
     private $middlewares = [];
+
+    /**
+     * @var bool
+     */
+    private $except = false;
 
     /**
      * Set admin middlewares
@@ -29,6 +36,13 @@ class MiddlewareGroup
         $this->setMiddlewares([
             new IsAuthenticatedMiddleware(),
             new IsActiveMiddleware()
+        ]);
+    }
+
+    public function guest()
+    {
+        $this->setMiddlewares([
+            new IsNotAuthenticatedMiddleware()
         ]);
     }
 
@@ -51,13 +65,37 @@ class MiddlewareGroup
     /**
      * @return bool
      */
-    public function handle()
+    public function getExcept()
     {
-        foreach ($this->getMiddlewares() as $middleware) {
-            if (!$middleware->next()) {
-                return false;
+        return $this->except;
+    }
+
+    public function except($except = [])
+    {
+        $requestedUri = new RequestedUri();
+
+        foreach ($except as $item) {
+            if ($requestedUri->getString() == $item->getString()) {
+                $this->except = true;
             }
         }
+    }
+
+    /**
+     * Check excepts
+     * @param Uri[] $except
+     * @return bool
+     */
+    public function handle()
+    {
+        if (!$this->getExcept()) {
+            foreach ($this->getMiddlewares() as $middleware) {
+                if (!$middleware->next()) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 }

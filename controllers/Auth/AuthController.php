@@ -4,7 +4,9 @@ namespace controllers\Auth;
 
 use core\Auth;
 use core\Redirect;
+use core\Uri;
 use core\View;
+use middleware\MiddlewareGroup;
 use model\Question;
 use model\User;
 use request\auth\LoginRequest;
@@ -13,6 +15,19 @@ use request\auth\PasswordResetRequest;
 
 class AuthController
 {
+    public function __construct()
+    {
+        $uri = new Uri();
+        $uri->setString('/logout');
+
+        $middleware = new MiddlewareGroup();
+        $middleware->guest();
+        $middleware->except([
+            $uri
+        ]);
+        $middleware->handle();
+    }
+
     public function loginPage()
     {
         $view = new View('login.twig');

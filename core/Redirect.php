@@ -15,4 +15,11 @@ class Redirect
         header("Location: $route");
         exit();
     }
+
+    public static function back()
+    {
+        var_dump($_SERVER);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
 }

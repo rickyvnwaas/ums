@@ -14,7 +14,7 @@ class Uri
         if (!empty($this->string)) {
             return rtrim($this->string,'/');
         }
-        return null;
+        return '';
     }
 
     /**
