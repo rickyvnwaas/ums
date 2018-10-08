@@ -97,10 +97,13 @@ class AuthController
 
         $result = $user->first();
 
-        $user->update($result->getId(), [
-            'password' => $request->password
-        ]);
+        if ($result) {
+            $user->update($result->getId(), [
+                'password' => $request->password
+            ]);
 
-        Redirect::route('');
+            Redirect::route('');
+        }
+        Redirect::route('password-reset');
     }
 }
